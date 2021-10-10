@@ -33,7 +33,8 @@ class Answers extends Component {
   async isLoggedIn(){
     let currentTime = new Date().getTime();
     let loginTime = this.props.auth.loggedInAt;
-    let diff = Math.round((currentTime - loginTime)/(60*60*1000));
+    if (!loginTime) return false;
+    let diff = (Math.round((parseInt(currentTime) - parseInt(loginTime))/(60*60*1000)));
     if(loginTime && diff > 1){
         return false;
     }else{
