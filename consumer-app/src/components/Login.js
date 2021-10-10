@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import { Redirect, withRouter } from "react-router";
 import { Spinner } from "react-bootstrap";
-import { Form, Col, Row, Button, Alert } from "react-bootstrap";
-import LoadingOverlay from "react-loading-overlay";
+import { Button, Alert } from "react-bootstrap";
 
 import { connect } from "react-redux";
 import { compose,bindActionCreators } from "redux";
 import { userSignIn } from "../actions/auth.actions";
-import axios from "axios";
 
 class Login extends Component {
   constructor(props) {
@@ -16,15 +14,6 @@ class Login extends Component {
       username: "",
       password: "",
       redirect: false,
-      usernameError: "",
-      passwordError: "",
-      showpassword: false,
-      validated: false,
-      invalidCredError: false,
-      btnLoginClick: false,
-      showVerificationPopup: false,
-      showForgotPasswordPopup: false,
-      errorMessage: "Invalid Credentials",
       emptyError: false
     };
   }
@@ -36,13 +25,11 @@ class Login extends Component {
 
     if(this.state.username ==='' || this.state.password === ''){
       this.setState({emptyError: true})
+      return false
     }
     const response =  await this.props.userSignIn({email: this.state.username, password: this.state.password});
     if (response && response.data.access_token){
-        console.log('print', this.props.auth)
-       
-        console.log('print', this.props.auth.token)
-        console.log('print2', this.props.auth.userEmail)
+       this.setState({redirect: true})
     }
   }
 
@@ -56,7 +43,9 @@ class Login extends Component {
 
   render() {
     const { redirect } = this.state;
-
+    if (redirect) {
+      return <Redirect to="/question" />;
+    }
     return(
       <div className="wrapper fadeInDown">
          {this.state.emptyError && (<Alert
@@ -90,12 +79,10 @@ class Login extends Component {
                     )}
                   </Button>
           </form>
-
         </div>
-      </div>    );
+      </div>);
   }
 }
-
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(

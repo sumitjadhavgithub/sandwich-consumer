@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SIGNIN } from "../config/urls";
+import { SIGNIN, USER } from "../config/urls";
 
 
 export const userSignIn = (payload) => {
@@ -7,32 +7,36 @@ export const userSignIn = (payload) => {
     let userEmail = payload.email;
     let password = payload.password;
     try {
-      try {
-        const headers =  { "Content-Type": "application/json"}
-        let payload ={
-          "grant_type": "password",
-          "email": userEmail,
-          "password": password,
-          "client_id": "TQXWDJYJZUELOTSGILGBKUAQQLNEIKDJDJIZ"
-        }
-        const response = await axios.post(
-          `${SIGNIN}`,
-          payload,
-          {
-            headers: headers
-          }
-        );
-        dispatch({
-          type: "USER_SIGN_IN",
-          token: response.data.access_token,
-          userEmail: payload.email,
-        });
-        return response;
-      } catch (e) {
-        console.log(e);
+      let headers =  { "Content-Type": "application/json"}
+      let payload ={
+        "grant_type": "password",
+        "email": userEmail,
+        "password": password,
+        "client_id": "TQXWDJYJZUELOTSGILGBKUAQQLNEIKDJDJIZ"
       }
-    } catch (error) {
-      
+      const response = await axios.post(
+        `${SIGNIN}`,
+        payload,
+        {
+          headers: headers
+        }
+      );
+      headers =  { "Content-Type": "application/json", "Authorization": `Bearer ${response.data.access_token}`}
+      const user_response = await axios.get(
+        `${USER}`,
+        {
+          headers: headers
+        }
+      );
+      dispatch({
+        type: "USER_SIGN_IN",
+        token: response.data.access_token,
+        userEmail: payload.email,
+        uuid: user_response.data.user.uuid
+      });
+      return response;
+    } catch (e) {
+      console.log(e);
     }
   };
 };

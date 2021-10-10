@@ -55,6 +55,19 @@ html {
     text-align: center;
   }
   
+  #questionContent {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
   #formFooter {
     background-color: #f6f6f6;
     border-top: 1px solid #dce8f1;
@@ -102,19 +115,45 @@ html {
     -o-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
   }
+
+  .submit-button, .btn-primary:disabled {
+    background-color: #4088ab;
+    border: none;
+    color: white;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+    -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px 20px 40px 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
   
   .login-button:hover, input[type=submit]:hover, input[type=reset]:hover  {
     background-color: #39ace7;
   }
   
-  .login-button:active, input[type=submit]:active, input[type=reset]:active  {
+  .submit-button:hover, input[type=submit]:hover, input[type=reset]:hover  {
+    background-color: #032435;
+  }
+
+  .login-button:active, .submit-button:active, input[type=submit]:active, input[type=reset]:active  {
     -moz-transform: scale(0.95);
     -webkit-transform: scale(0.95);
     -o-transform: scale(0.95);
     -ms-transform: scale(0.95);
     transform: scale(0.95);
   }
-  
+
   .textbox {
     background-color: #f6f6f6;
     border: none;
@@ -261,3 +300,30 @@ html {
     width:60%;
   }
   
+  .question-label {
+  margin-top: 50px;
+  font-size: 47.9px;
+  color: #FF9983
+  }
+
+  .alert-danger, .alert-info {
+    text-align: center;
+  }
+
+  body {
+    background-color: #56BAED;
+  }
+  .answer-label
+  {
+    font-size: 30px;
+  }
+
+  .answer-link{
+    float: right;
+    margin-top: 20px;
+    margin-right: 20px;
+    font: bold 11px Arial;
+    text-decoration: none;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+  }
