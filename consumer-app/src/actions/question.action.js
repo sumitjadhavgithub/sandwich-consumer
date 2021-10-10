@@ -42,7 +42,7 @@ export const getQuestions = () => {
       );
       dispatch({
         type: "SET_QUESTIONS",
-        question: response.data.questions[0]
+        question: response.data.questions
       });
       return response;
     } catch (e) {

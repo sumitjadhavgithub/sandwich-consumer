@@ -13,7 +13,8 @@ class Question extends Component {
         answer: "",
         emptyError: false,
         success: false,
-        redirect: false
+        redirect: false,
+        wrongError: false
     };
   }
  
@@ -48,9 +49,13 @@ class Question extends Component {
         this.setState({redirect: true});
         return false;
     }
-    if(this.state.answer === ''){
-      this.setState({emptyError: true})
-      return false
+    let answer = this.state.answer;
+    if(answer === ''){
+      this.setState({emptyError: true});
+      return false;
+    }else if(["yes", "i don't know", "no", "that's fine"].includes(answer.toLowerCase())){
+      this.setState({wrongError: true});
+      return false;
     }
     this.setState({btnClick: true})
     let question_id = this.props.questions.question_id;
@@ -96,6 +101,13 @@ class Question extends Component {
                     onClose={() => this.setState({ success: false })}
                 >
                   Answer submitted successfully
+                </Alert>)}
+                {this.state.wrongError && (<Alert
+                    variant="danger"
+                    dismissible
+                    onClose={() => this.setState({ wrongError: false })}
+                >
+                  Submitted answer is not allowed.
                 </Alert>)}
                 <div className="answer-link" >
                     <Button onClick={e => this.showAnswers(e)} >Show Answers</Button>
