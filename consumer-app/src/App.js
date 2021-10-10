@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
 import "./styles/styles.css";
-import { withRouter, Switch } from "react-router";
+import { Switch } from "react-router";
+import { Redirect } from "react-router-dom";
 import Login from "./components/Login";
 import Question from "./components/Question";
 import Answers from "./components/Answers";
@@ -24,6 +25,9 @@ class App extends Component {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/question" component={Question} />
                 <Route exact path="/answers" component={Answers} />
+                <Route path="/">
+                  <Redirect to="/login" component={Login} ></Redirect>
+                </Route>
                 <Route component={Error} />
               </Switch>
             </PersistGate>
